@@ -31,6 +31,31 @@ jobs:
         shell: bash
         run: npm ci # tambien podemos poner npm intall pero npm ci es un paquete propio de github para instalar estas dependencias en un entorno ci
 
-      - name: CorrerPruebas
+      - name: CorrerPruebasUnitarias
         shell: bash
         run: npm run test
+
+      - name: CorrerPruebasIntegracion
+        shell: bash
+        run: npm run test:e2e
+
+  static-test:
+    runs-on: ubuntu-lastes
+    steps:
+      - name: CheckoutCodigo
+        uses: actions/checkout@v3
+
+      - name: ConfigurarNode
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+          cache-dependency-path: ./api/package-lock.json
+
+      - name: InstalarDependencias
+        shell: bash
+        run: npm ci
+
+      - name: EjecutarLint
+        shell: bash
+        run: npm run lint
