@@ -36,7 +36,7 @@ jobs:
         run: npm run test
 
   static-test:
-    runs-on: ubuntu-lastes
+    runs-on: ubuntu-latest
     steps:
       - name: CheckoutCodigo
         uses: actions/checkout@v3
