@@ -17,20 +17,20 @@ jobs:
   unit-test: # nombre que queremos darle al job
     runs-on: ubuntu-latest
     steps:
-      - name: CopiarCodigo
-        uses: actions/checkout@v2 # usamos githubaction en su v2 de checkout para clonar nuestro repo a la maquina
+      - name: CheckoutCodigo
+        uses: actions/checkout@v3 # usamos githubaction en su v2 de checkout para clonar nuestro repo a la maquina
 
       - name: ConfigurarNode
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
           cache: 'npm'
           cache-dependency-path: ./api/package-lock.js
 
       - name: InstalarDependencias
         shell: bash
-        run: npm ci # tambioen podemos poner npm intall pero npm ci es un paquete propio de github para instalar estas dependencias en un entorno ci
+        run: npm ci # tambien podemos poner npm intall pero npm ci es un paquete propio de github para instalar estas dependencias en un entorno ci
 
-      - name: EjecutarPruebas
+      - name: CorrerPruebas
         shell: bash
         run: npm run test
