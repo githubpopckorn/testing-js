@@ -1,0 +1,37 @@
+name : API CI
+# on: [push] si solo hubiera un solo proyecto se lo podria dejar asi
+
+# Pero tenemos una api y un proyecto demos 
+on: 
+  push:
+    paths:
+      - "./api/**"
+      - "github/workflows/api.ci.yml"
+
+defaults:
+  run:
+    working-directory: ./api
+
+# Job son la forma de que github actions puede automatizar
+jobs:
+  unit-test: # nombre que queremos darle al job
+    runs-on: ubuntu-latest
+    steps:
+
+      -name: CopiarCodigo
+        uses: actions/checkout@v2 # usamos githubaction en su v2 de checkout para clonar nuestro repo a la maquina
+
+      -name: ConfigurarNode
+        uses: actions/setup-node@v2
+        with: 
+          node-version: 14
+          cache: 'npm'
+          cache-dependency-path: ./api/package-lock.js
+
+      -name: InstalarDependencias
+        shell: bash
+        run: npm ci # tambioen podemos poner npm intall pero npm ci es un paquete propio de github para instalar estas dependencias en un entorno ci
+
+      -name: EjecutarPruebas
+        shell: bash
+        run: npm run test
