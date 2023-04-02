@@ -7,7 +7,7 @@ on:
     paths:
       - "./api/**"
       - "github/workflows/api.ci.yml"
-
+      
 defaults:
   run:
     working-directory: ./api
@@ -17,9 +17,8 @@ jobs:
   unit-test: # nombre que queremos darle al job
     runs-on: ubuntu-latest
     steps:
-
       -name: CopiarCodigo
-        uses: actions/checkout@v2 # usamos githubaction en su v2 de checkout para clonar nuestro repo a la maquina
+      uses: actions/checkout@v2 # usamos githubaction en su v2 de checkout para clonar nuestro repo a la maquina
 
       -name: ConfigurarNode
         uses: actions/setup-node@v2
