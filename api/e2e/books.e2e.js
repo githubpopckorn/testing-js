@@ -15,7 +15,7 @@ const createApp = require('../src/app')
 const { generateManyBook } = require('../src/fakes/book.fake')
 const request = require('supertest')
 
-describe('Test books endpoint', () => {
+describe('Test books endpoints', () => {
   let app
   let server
   beforeEach(() => {
